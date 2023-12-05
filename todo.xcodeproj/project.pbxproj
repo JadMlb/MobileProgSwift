@@ -13,6 +13,10 @@
 		05789D6F2B14989A0080C775 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05789D6D2B14989A0080C775 /* Main.storyboard */; };
 		05789D712B14989C0080C775 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05789D702B14989C0080C775 /* Assets.xcassets */; };
 		05789D742B14989C0080C775 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05789D722B14989C0080C775 /* LaunchScreen.storyboard */; };
+		05789D7C2B149F7E0080C775 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05789D7B2B149F7E0080C775 /* Task.swift */; };
+		05789D802B14A0850080C775 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05789D7F2B14A0850080C775 /* TaskTableViewCell.swift */; };
+		05789D842B14A7090080C775 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05789D832B14A7090080C775 /* Section.swift */; };
+		05789D862B14A74D0080C775 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05789D852B14A74D0080C775 /* SectionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		05789D702B14989C0080C775 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05789D732B14989C0080C775 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05789D752B14989C0080C775 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05789D7B2B149F7E0080C775 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		05789D7F2B14A0850080C775 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		05789D832B14A7090080C775 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		05789D852B14A74D0080C775 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +67,11 @@
 				05789D672B14989A0080C775 /* AppDelegate.swift */,
 				05789D692B14989A0080C775 /* SceneDelegate.swift */,
 				05789D6B2B14989A0080C775 /* ViewController.swift */,
+				05789D852B14A74D0080C775 /* SectionTableViewCell.swift */,
 				05789D6D2B14989A0080C775 /* Main.storyboard */,
+				05789D832B14A7090080C775 /* Section.swift */,
+				05789D7B2B149F7E0080C775 /* Task.swift */,
+				05789D7F2B14A0850080C775 /* TaskTableViewCell.swift */,
 				05789D702B14989C0080C775 /* Assets.xcassets */,
 				05789D722B14989C0080C775 /* LaunchScreen.storyboard */,
 				05789D752B14989C0080C775 /* Info.plist */,
@@ -138,7 +150,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05789D7C2B149F7E0080C775 /* Task.swift in Sources */,
 				05789D6C2B14989A0080C775 /* ViewController.swift in Sources */,
+				05789D802B14A0850080C775 /* TaskTableViewCell.swift in Sources */,
+				05789D842B14A7090080C775 /* Section.swift in Sources */,
+				05789D862B14A74D0080C775 /* SectionTableViewCell.swift in Sources */,
 				05789D682B14989A0080C775 /* AppDelegate.swift in Sources */,
 				05789D6A2B14989A0080C775 /* SceneDelegate.swift in Sources */,
 			);
