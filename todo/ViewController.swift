@@ -39,7 +39,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         else
         {
             let cell = tableView.dequeueReusableCell (withIdentifier: "listItem", for: indexPath) as! TaskTableViewCell
-            let task = tasksOrganized[indexPath.section][indexPath.row - 1]
+            let task = filteredTasks[indexPath.section][indexPath.row - 1]
             cell.title.text = task.title
             cell.desc.text = task.desc
             cell.isChecked.isOn = task.isDone
@@ -63,6 +63,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return 85
         }
         return 45
+    }
+    
+    func tableView (_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let configuration = UISwipeActionsConfiguration (actions: [UIContextualAction(style: .destructive, title: "Delete", handler: {(action, view, completionHandler) in
+                let row = indexPath.row
+                let section = indexPath.section
+            self.deleteFromOrganized(task: self.filteredTasks[section][row - 1])
+            self.filteredTasks[section].remove (at: row - 1)
+            completionHandler (true)
+            self.allTasks.reloadData()
+        })])
+        
+        return configuration
+    }
+    
+    func deleteFromOrganized (task: Task)
+    {
+        for i in 0..<tasksOrganized.count
+        {
+            for j in 0..<tasksOrganized[i].count
+            {
+                let t = tasksOrganized[i][j]
+                if (t.title == task.title && t.desc == task.desc)
+                {
+                    tasksOrganized[i].remove (at: j)
+                }
+            }
+        }
     }
     
     override func prepare (for segue: UIStoryboardSegue, sender: Any?)
