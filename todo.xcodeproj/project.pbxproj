@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0537274F2B4B6B2B00DDEADA /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0537274E2B4B6B2B00DDEADA /* DetailsViewController.swift */; };
+		056542FB2B4CD79E00830BF3 /* tasks.json in Resources */ = {isa = PBXBuildFile; fileRef = 056542FA2B4CD79D00830BF3 /* tasks.json */; };
 		05789D682B14989A0080C775 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05789D672B14989A0080C775 /* AppDelegate.swift */; };
 		05789D6A2B14989A0080C775 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05789D692B14989A0080C775 /* SceneDelegate.swift */; };
 		05789D6C2B14989A0080C775 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05789D6B2B14989A0080C775 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		0537274E2B4B6B2B00DDEADA /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		056542FA2B4CD79D00830BF3 /* tasks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tasks.json; sourceTree = "<group>"; };
 		05789D642B14989A0080C775 /* todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05789D672B14989A0080C775 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05789D692B14989A0080C775 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		056542F92B4CC88A00830BF3 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				056542FA2B4CD79D00830BF3 /* tasks.json */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		05789D5B2B14989A0080C775 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +78,7 @@
 		05789D662B14989A0080C775 /* todo */ = {
 			isa = PBXGroup;
 			children = (
+				056542F92B4CC88A00830BF3 /* data */,
 				05789D672B14989A0080C775 /* AppDelegate.swift */,
 				05789D692B14989A0080C775 /* SceneDelegate.swift */,
 				05789D6B2B14989A0080C775 /* ViewController.swift */,
@@ -143,6 +154,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				056542FB2B4CD79E00830BF3 /* tasks.json in Resources */,
 				05789D742B14989C0080C775 /* LaunchScreen.storyboard in Resources */,
 				05789D712B14989C0080C775 /* Assets.xcassets in Resources */,
 				05789D6F2B14989A0080C775 /* Main.storyboard in Resources */,

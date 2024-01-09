@@ -1,0 +1,27 @@
+{
+    "tasks": [
+        {
+            "title": "Today Test",
+            "desc": "test",
+            "isDone": false
+        },
+        {
+            "title": "Another test",
+            "desc": "this description is longer and this task has a due date",
+            "dueDate": 1704878339,
+            "isDone": false
+        },
+        {
+            "title": "a task that is set for later",
+            "desc": "do me later",
+            "dueDate": 1707556739,
+            "isDone": false
+        },
+        {
+            "title": "NEXT WEEEKK!!!",
+            "desc": "something important",
+            "dueDate": 1705069139,
+            "isDone": false
+        }
+    ]
+}

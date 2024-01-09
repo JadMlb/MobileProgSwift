@@ -7,11 +7,20 @@
 
 import Foundation
 
-class Task
+class Tasks: Codable
+{
+    var tasks: [Task]
+    
+    init (tasks: [Task])
+    {
+        self.tasks = tasks
+    }
+}
+
+class Task: Codable
 {
     var isDone : Bool = false
-    var title : String
-    var desc : String
+    var title, desc : String
     var dueDate : Date?
     
     init (title: String, desc: String, dueDate: Date)

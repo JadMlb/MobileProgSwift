@@ -7,12 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIApplicationDelegate
 {
     @IBOutlet weak var allTasks: UITableView!
     let sectionTitles = ["Today", "Tomorrow", "This week", "Later"]
     var sections = [false, false, false, false]
-    var tasks = [Task (title: "Today test", desc: "test"), Task (title: "Today test 2", desc: "test 2", dueDate: Date (timeIntervalSinceNow: 100000))]
+    var tasks : [Task] = [] // [Task (title: "Today test", desc: "test"), Task (title: "Today test 2", desc: "test 2", dueDate: Date (timeIntervalSinceNow: 100000))]
     var tasksFiltered = [[Task](), [Task](), [Task](), [Task]()]
     
     func numberOfSections (in tableView: UITableView) -> Int
@@ -75,6 +75,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         super.viewWillAppear (animated)
         allTasks.reloadData()
+        save()
     }
     
     @IBAction func cancel (_ unwindSegue: UIStoryboardSegue)
@@ -100,6 +101,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func addTaskToFiltered (_ task : Task)
     {
+        tasks.append (task)
         let date = task.dueDate
         var idx = 0
         
@@ -107,11 +109,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             if (Calendar.current.isDateInToday (date!))
             {
-                idx = 1
+                idx = 0
             }
             else if (Calendar.current.isDateInTomorrow (date!))
             {
-                idx = 2
+                idx = 1
             }
             else
             {
@@ -119,16 +121,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let taskDateComps = Calendar.current.dateComponents([.weekOfYear, .year], from: date!)
                 if (nowComps.year == taskDateComps.year && nowComps.weekOfYear == taskDateComps.weekOfYear)
                 {
-                    idx = 3
+                    idx = 2
                 }
                 else if (nowComps.year == taskDateComps.year && nowComps.weekOfYear! < taskDateComps.weekOfYear!)
                 {
-                    idx = 4
+                    idx = 3
                 }
             }
         }
         
         tasksFiltered[idx].append (task)
+        
+        // save on add
+        save()
+    }
+    
+    func save ()
+    {
+        let encoder = JSONEncoder();
+        encoder.dateEncodingStrategy = .secondsSince1970
+        if let data = try? encoder.encode (tasks)
+        {
+            if let path = Bundle.main.url(forResource: "tasks", withExtension: "json")
+            {
+                try? data.write (to: path)
+                print ("im here")
+            }
+        }
     }
     
     func filterTasks (_ tasks: [Task])
@@ -146,7 +165,46 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         allTasks.dataSource = self
         allTasks.delegate = self
         
-        filterTasks (tasks)
+        if let path = Bundle.main.path (forResource: "tasks", ofType: "json")
+        {
+            if let str = try? String (contentsOfFile: path)
+            {
+                let rawData = Data (str.utf8)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .secondsSince1970
+                if let jsonData = try? decoder.decode (Tasks.self, from: rawData)
+                {
+                    let tasks = jsonData.tasks
+                    filterTasks (tasks)
+                }
+                else
+                {
+                    print ("couldn't understand")
+                }
+            }
+            else
+            {
+                print ("wrong file contents")
+            }
+        }
+        else
+        {
+            print ("no such file")
+        }
+    }
+    
+    func applicationWillTerminate (_ application: UIApplication)
+    {
+        print ("terminating")
+        let encoder = JSONEncoder();
+        encoder.dateEncodingStrategy = .secondsSince1970
+        if let data = try? encoder.encode (tasks)
+        {
+            if let path = Bundle.main.url(forResource: "tasks", withExtension: "json")
+            {
+                try? data.write (to: path)
+            }
+        }
     }
 }
 
