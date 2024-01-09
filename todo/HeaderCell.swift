@@ -1,17 +1,19 @@
 //
-//  TaskTableViewCell.swift
+//  HeaderCell.swift
 //  todo
 //
-//  Created by Jad on 27/11/2023.
+//  Created by Jad on 05/12/2023.
 //
 
 import UIKit
 
-class TaskTableViewCell: UITableViewCell
+class HeaderCell: UITableViewCell
 {
-    @IBOutlet weak var isChecked: UISwitch!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var desc: UILabel!
+    
+    @IBAction func onHeaderClicked (_ sender: Any)
+    {
+        
+    }
     
     override func awakeFromNib ()
     {
@@ -26,8 +28,4 @@ class TaskTableViewCell: UITableViewCell
         // Configure the view for the selected state
     }
 
-    @IBAction func toggleChecked (_ sender: UISwitch)
-    {
-        
-    }
 }
