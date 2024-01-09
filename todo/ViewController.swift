@@ -7,22 +7,25 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIApplicationDelegate
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIApplicationDelegate, UISearchBarDelegate
 {
     @IBOutlet weak var allTasks: UITableView!
     let sectionTitles = ["Today", "Tomorrow", "This week", "Later"]
     var sections = [false, false, false, false]
     var tasks : [Task] = [] // [Task (title: "Today test", desc: "test"), Task (title: "Today test 2", desc: "test 2", dueDate: Date (timeIntervalSinceNow: 100000))]
-    var tasksFiltered = [[Task](), [Task](), [Task](), [Task]()]
+    var tasksOrganized = [[Task](), [Task](), [Task](), [Task]()]
+    var filteredTasks = [[Task](), [Task](), [Task](), [Task]()]
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     func numberOfSections (in tableView: UITableView) -> Int
     {
-        tasksFiltered.count
+        return tasksOrganized.count
     }
     
     func tableView (_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return sections[section] ? tasksFiltered[section].count + 1 : 1
+        return sections[section] ? filteredTasks[section].count + 1 : 1
     }
     
     func tableView (_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -36,7 +39,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         else
         {
             let cell = tableView.dequeueReusableCell (withIdentifier: "listItem", for: indexPath) as! TaskTableViewCell
-            let task = tasksFiltered[indexPath.section][indexPath.row - 1]
+            let task = tasksOrganized[indexPath.section][indexPath.row - 1]
             cell.title.text = task.title
             cell.desc.text = task.desc
             cell.isChecked.isOn = task.isDone
@@ -67,7 +70,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let vc = segue.destination as? DetailsViewController
         {
             let indexPath = allTasks.indexPathForSelectedRow!
-            vc.data = tasksFiltered[indexPath.section][indexPath.row - 1]
+            vc.data = tasksOrganized[indexPath.section][indexPath.row - 1]
         }
     }
     
@@ -97,6 +100,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 allTasks.reloadData()
             }
         }
+    }
+    
+    func searchBar (_ searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        // clear tasks
+        for i in 0...3
+        {
+            filteredTasks[i] = [Task]()
+        }
+        
+        for i in 0..<tasksOrganized.count
+        {
+            for task in tasksOrganized[i]
+            {
+                if searchText.isEmpty || task.title.lowercased().contains (searchText.lowercased())
+                {
+                    filteredTasks[i].append (task)
+                }
+            }
+        }
+        
+        allTasks.reloadData()
     }
     
     func addTaskToFiltered (_ task : Task)
@@ -130,7 +155,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         
-        tasksFiltered[idx].append (task)
+        tasksOrganized[idx].append (task)
         
         // save on add
         save()
@@ -176,6 +201,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 {
                     let tasks = jsonData.tasks
                     filterTasks (tasks)
+                    
+                    // copy all data at start
+                    for i in 0..<tasksOrganized.count
+                    {
+                        for task in tasksOrganized[i]
+                        {
+                            filteredTasks[i].append (task)
+                        }
+                    }
                 }
                 else
                 {
@@ -190,20 +224,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         else
         {
             print ("no such file")
-        }
-    }
-    
-    func applicationWillTerminate (_ application: UIApplication)
-    {
-        print ("terminating")
-        let encoder = JSONEncoder();
-        encoder.dateEncodingStrategy = .secondsSince1970
-        if let data = try? encoder.encode (tasks)
-        {
-            if let path = Bundle.main.url(forResource: "tasks", withExtension: "json")
-            {
-                try? data.write (to: path)
-            }
         }
     }
 }
