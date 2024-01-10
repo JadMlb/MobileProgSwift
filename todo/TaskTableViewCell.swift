@@ -12,6 +12,7 @@ class TaskTableViewCell: UITableViewCell
     @IBOutlet weak var isChecked: UISwitch!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var desc: UILabel!
+    var originalData: Task?
     
     override func awakeFromNib ()
     {
@@ -28,6 +29,9 @@ class TaskTableViewCell: UITableViewCell
 
     @IBAction func toggleChecked (_ sender: UISwitch)
     {
-        
+        if let data = originalData
+        {
+            data.isDone = sender.isOn
+        }
     }
 }

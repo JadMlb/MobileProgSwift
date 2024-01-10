@@ -7,16 +7,6 @@
 
 import Foundation
 
-class Tasks: Codable
-{
-    var tasks: [Task]
-    
-    init (tasks: [Task])
-    {
-        self.tasks = tasks
-    }
-}
-
 class Task: Codable
 {
     var isDone : Bool = false

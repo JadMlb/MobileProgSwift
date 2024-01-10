@@ -20,6 +20,10 @@
 		05789D842B14A7090080C775 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05789D832B14A7090080C775 /* Section.swift */; };
 		05789D862B14A74D0080C775 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05789D852B14A74D0080C775 /* SectionTableViewCell.swift */; };
 		05C18BF62B2994C100E0E158 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C18BF52B2994C100E0E158 /* EditViewController.swift */; };
+		05E903332B4E06BC00D9C416 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E903322B4E06BC00D9C416 /* CategoryTableViewCell.swift */; };
+		05E903352B4E07CD00D9C416 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E903342B4E07CD00D9C416 /* CategoriesViewController.swift */; };
+		05E903372B4E097500D9C416 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E903362B4E097500D9C416 /* Category.swift */; };
+		05E903392B4E0CFB00D9C416 /* CategoriesEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E903382B4E0CFB00D9C416 /* CategoriesEditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +42,10 @@
 		05789D832B14A7090080C775 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		05789D852B14A74D0080C775 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 		05C18BF52B2994C100E0E158 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		05E903322B4E06BC00D9C416 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		05E903342B4E07CD00D9C416 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
+		05E903362B4E097500D9C416 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		05E903382B4E0CFB00D9C416 /* CategoriesEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +86,7 @@
 		05789D662B14989A0080C775 /* todo */ = {
 			isa = PBXGroup;
 			children = (
+				05E903362B4E097500D9C416 /* Category.swift */,
 				056542F92B4CC88A00830BF3 /* data */,
 				05789D672B14989A0080C775 /* AppDelegate.swift */,
 				05789D692B14989A0080C775 /* SceneDelegate.swift */,
@@ -86,8 +95,11 @@
 				0537274E2B4B6B2B00DDEADA /* DetailsViewController.swift */,
 				05789D852B14A74D0080C775 /* SectionTableViewCell.swift */,
 				05789D6D2B14989A0080C775 /* Main.storyboard */,
+				05E903322B4E06BC00D9C416 /* CategoryTableViewCell.swift */,
 				05789D832B14A7090080C775 /* Section.swift */,
 				05789D7B2B149F7E0080C775 /* Task.swift */,
+				05E903342B4E07CD00D9C416 /* CategoriesViewController.swift */,
+				05E903382B4E0CFB00D9C416 /* CategoriesEditViewController.swift */,
 				05789D7F2B14A0850080C775 /* TaskTableViewCell.swift */,
 				05789D702B14989C0080C775 /* Assets.xcassets */,
 				05789D722B14989C0080C775 /* LaunchScreen.storyboard */,
@@ -169,10 +181,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				05789D7C2B149F7E0080C775 /* Task.swift in Sources */,
+				05E903352B4E07CD00D9C416 /* CategoriesViewController.swift in Sources */,
 				05789D6C2B14989A0080C775 /* ViewController.swift in Sources */,
 				0537274F2B4B6B2B00DDEADA /* DetailsViewController.swift in Sources */,
 				05789D802B14A0850080C775 /* TaskTableViewCell.swift in Sources */,
+				05E903372B4E097500D9C416 /* Category.swift in Sources */,
 				05C18BF62B2994C100E0E158 /* EditViewController.swift in Sources */,
+				05E903332B4E06BC00D9C416 /* CategoryTableViewCell.swift in Sources */,
+				05E903392B4E0CFB00D9C416 /* CategoriesEditViewController.swift in Sources */,
 				05789D842B14A7090080C775 /* Section.swift in Sources */,
 				05789D862B14A74D0080C775 /* SectionTableViewCell.swift in Sources */,
 				05789D682B14989A0080C775 /* AppDelegate.swift in Sources */,

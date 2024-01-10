@@ -43,6 +43,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.title.text = task.title
             cell.desc.text = task.desc
             cell.isChecked.isOn = task.isDone
+            cell.originalData = task
             return cell
         }
     }
@@ -106,6 +107,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear (_ animated: Bool)
     {
         super.viewWillAppear (animated)
+        tasksOrganized = [[Task](), [Task](), [Task](), [Task]()]
+        filteredTasks = [[Task](), [Task](), [Task](), [Task]()]
+        organizeTasks (tasks)
+        filterData (by: "")
         allTasks.reloadData()
         save()
     }
@@ -125,8 +130,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             if let newTask = vc.data
             {
-                addTaskToFiltered (newTask)
+                addTaskToOrganized (newTask)
                 allTasks.reloadData()
+            }
+        }
+    }
+    
+    func filterData (by: String)
+    {
+        for i in 0..<tasksOrganized.count
+        {
+            for task in tasksOrganized[i]
+            {
+                if by.isEmpty || task.title.lowercased().contains (by.lowercased())
+                {
+                    filteredTasks[i].append (task)
+                }
             }
         }
     }
@@ -139,23 +158,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             filteredTasks[i] = [Task]()
         }
         
-        for i in 0..<tasksOrganized.count
-        {
-            for task in tasksOrganized[i]
-            {
-                if searchText.isEmpty || task.title.lowercased().contains (searchText.lowercased())
-                {
-                    filteredTasks[i].append (task)
-                }
-            }
-        }
+        filterData (by: searchText)
         
         allTasks.reloadData()
     }
     
-    func addTaskToFiltered (_ task : Task)
+    func addTaskToOrganized (_ task : Task, addToAllTasks: Bool = false)
     {
-        tasks.append (task)
+        if (addToAllTasks)
+        {
+            tasks.append (task)
+        }
+        
         let date = task.dueDate
         var idx = 0
         
@@ -204,11 +218,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func filterTasks (_ tasks: [Task])
+    func organizeTasks (_ tasks: [Task])
     {
         for task in tasks
         {
-            addTaskToFiltered (task)
+            addTaskToOrganized (task)
         }
     }
     
@@ -218,42 +232,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view.
         allTasks.dataSource = self
         allTasks.delegate = self
-        
-        if let path = Bundle.main.path (forResource: "tasks", ofType: "json")
-        {
-            if let str = try? String (contentsOfFile: path)
-            {
-                let rawData = Data (str.utf8)
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .secondsSince1970
-                if let jsonData = try? decoder.decode (Tasks.self, from: rawData)
-                {
-                    let tasks = jsonData.tasks
-                    filterTasks (tasks)
-                    
-                    // copy all data at start
-                    for i in 0..<tasksOrganized.count
-                    {
-                        for task in tasksOrganized[i]
-                        {
-                            filteredTasks[i].append (task)
-                        }
-                    }
-                }
-                else
-                {
-                    print ("couldn't understand")
-                }
-            }
-            else
-            {
-                print ("wrong file contents")
-            }
-        }
-        else
-        {
-            print ("no such file")
-        }
+        organizeTasks (tasks)
     }
 }
 
