@@ -65,7 +65,6 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     {
         let configuration = UISwipeActionsConfiguration (actions: [UIContextualAction(style: .destructive, title: "Delete", handler: {(action, view, completionHandler) in
                 let row = indexPath.row
-                let section = indexPath.section
             self.categories.remove (at: row)
             completionHandler (true)
             self.categsTableView.reloadData()
@@ -80,6 +79,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         {
             let indexPath = categsTableView.indexPathForSelectedRow!
             dest.tasks = categories[indexPath.row].tasks
+            dest.titleLabelText = categories[indexPath.row].name
         }
     }
 

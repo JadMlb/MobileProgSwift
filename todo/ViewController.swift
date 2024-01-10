@@ -9,7 +9,9 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIApplicationDelegate, UISearchBarDelegate
 {
+    @IBOutlet weak var pageTitleLabel: UILabel!
     @IBOutlet weak var allTasks: UITableView!
+    var titleLabelText: String = ""
     let sectionTitles = ["Today", "Tomorrow", "This week", "Later"]
     var sections = [false, false, false, false]
     var tasks : [Task] = [] // [Task (title: "Today test", desc: "test"), Task (title: "Today test 2", desc: "test 2", dueDate: Date (timeIntervalSinceNow: 100000))]
@@ -233,6 +235,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         allTasks.dataSource = self
         allTasks.delegate = self
         organizeTasks (tasks)
+        pageTitleLabel.text = titleLabelText
     }
 }
 

@@ -260,6 +260,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="allTasks" destination="pJb-fK-uqM" id="dwG-CL-j5T"/>
+                        <outlet property="pageTitleLabel" destination="ghz-6v-2gT" id="xQl-dC-QSe"/>
                         <outlet property="searchBar" destination="daW-4e-3OX" id="loj-8G-Oja"/>
                     </connections>
                 </viewController>
