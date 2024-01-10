@@ -11,10 +11,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 {
     @IBOutlet weak var pageTitleLabel: UILabel!
     @IBOutlet weak var allTasks: UITableView!
-    var titleLabelText: String = ""
+    var category: Category?
     let sectionTitles = ["Today", "Tomorrow", "This week", "Later"]
     var sections = [false, false, false, false]
-    var tasks : [Task] = [] // [Task (title: "Today test", desc: "test"), Task (title: "Today test 2", desc: "test 2", dueDate: Date (timeIntervalSinceNow: 100000))]
+//    var tasks : [Task] = [] // [Task (title: "Today test", desc: "test"), Task (title: "Today test 2", desc: "test 2", dueDate: Date (timeIntervalSinceNow: 100000))]
     var tasksOrganized = [[Task](), [Task](), [Task](), [Task]()]
     var filteredTasks = [[Task](), [Task](), [Task](), [Task]()]
     
@@ -111,10 +111,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewWillAppear (animated)
         tasksOrganized = [[Task](), [Task](), [Task](), [Task]()]
         filteredTasks = [[Task](), [Task](), [Task](), [Task]()]
-        organizeTasks (tasks)
+        organizeTasks (category!.tasks)
         filterData (by: "")
         allTasks.reloadData()
-        save()
     }
     
     @IBAction func cancel (_ unwindSegue: UIStoryboardSegue)
@@ -132,7 +131,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             if let newTask = vc.data
             {
-                addTaskToOrganized (newTask)
+                addTaskToOrganized (newTask, addToAllTasks: true)
+                filterData (by: "")
                 allTasks.reloadData()
             }
         }
@@ -169,7 +169,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         if (addToAllTasks)
         {
-            tasks.append (task)
+            category!.tasks.append (task)
         }
         
         let date = task.dueDate
@@ -201,23 +201,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         tasksOrganized[idx].append (task)
-        
-        // save on add
-        save()
-    }
-    
-    func save ()
-    {
-        let encoder = JSONEncoder();
-        encoder.dateEncodingStrategy = .secondsSince1970
-        if let data = try? encoder.encode (tasks)
-        {
-            if let path = Bundle.main.url(forResource: "tasks", withExtension: "json")
-            {
-                try? data.write (to: path)
-                print ("im here")
-            }
-        }
     }
     
     func organizeTasks (_ tasks: [Task])
@@ -234,8 +217,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view.
         allTasks.dataSource = self
         allTasks.delegate = self
-        organizeTasks (tasks)
-        pageTitleLabel.text = titleLabelText
+        organizeTasks (category!.tasks)
+        pageTitleLabel.text = category!.name
     }
 }
 

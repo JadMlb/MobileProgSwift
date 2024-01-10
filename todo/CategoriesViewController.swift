@@ -78,8 +78,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         if let dest = segue.destination as? ViewController
         {
             let indexPath = categsTableView.indexPathForSelectedRow!
-            dest.tasks = categories[indexPath.row].tasks
-            dest.titleLabelText = categories[indexPath.row].name
+            dest.category = categories[indexPath.row]
         }
     }
 
@@ -101,6 +100,28 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
                 categsTableView.reloadData()
             }
         }
+    }
+    
+    func save ()
+    {
+        let encoder = JSONEncoder();
+        encoder.dateEncodingStrategy = .secondsSince1970
+        if let data = try? encoder.encode (categories)
+        {
+            if let path = Bundle.main.url(forResource: "tasks", withExtension: "json")
+            {
+                if (try? data.write (to: path)) != nil
+                {
+                    print ("ok")
+                }
+            }
+        }
+    }
+    
+    override func viewWillAppear (_ animated: Bool)
+    {
+        super.viewWillAppear (animated)
+        save()
     }
     
     /*
